@@ -16,7 +16,7 @@ from typing import List, Dict, Any, Tuple, Optional
 # --- Constants ---
 WARP_API_URL = "https://api.cloudflareclient.com/v0a4005/reg"
 USER_AGENT = "insomnia/8.6.1"
-ENDPOINT_API_URL = "https://raw.githubusercontent.com/ircfspace/endpoint/refs/heads/main/ip.json"
+ENDPOINT_API_URL = "https://raw.githubusercontent.com/Fril66/endpoint/refs/heads/main/ip.json"
 
 # Manual IPv4 prefixes and ports (replace with your own list)
 IPV4_PREFIXES = [
@@ -316,7 +316,7 @@ def main():
     readme_content = [
         "# 🌩️ WARP Endpoint Scanner",
         "",
-        "[![Workflow Status](https://github.com/your-username/your-repo/actions/workflows/main.yml/badge.svg)](https://github.com/your-username/your-repo/actions)",
+        "[![Workflow Status](https://github.com/Fril66/your-repo/actions/workflows/main.yml/badge.svg)](https://github.com/Fril66/your-repo/actions)",
         "[![Python Version](https://img.shields.io/badge/python-3.10-blue)](https://www.python.org)",
         "[![Xray Version](https://img.shields.io/badge/Xray-v1.8.23-blue)](https://github.com/XTLS/Xray-core)",
         "",
