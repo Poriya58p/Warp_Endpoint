@@ -1,0 +1,49 @@
+name: WARP Endpoint
+
+on:
+  push:
+  schedule:
+    - cron: '0 0 * * *'  # Run daily
+  workflow_dispatch:
+
+jobs:
+  test-endpoints:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pynacl
+
+      - name: Create Files Directory
+        run: mkdir -p Files
+
+      - name: Download Xray
+        run: |
+          wget https://github.com/XTLS/Xray-core/releases/download/v1.8.23/Xray-linux-64.zip
+          unzip -o Xray-linux-64.zip xray -d Files
+          chmod +x Files/xray
+
+      - name: Test IPv6 Connectivity
+        run: |
+          ping6 -c 4 2606:4700::6810:10a1 || echo "IPv6 not supported in this environment"
+          curl -6 --head https://1.1.1.1 || echo "IPv6 curl failed"
+
+      - name: Run IP Generation and Test Script
+        run: python Files/script.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add README.md
+          git commit -m "Update README with latest WARP endpoint results" || echo "No changes to commit"
+          git push
